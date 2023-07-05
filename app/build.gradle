@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace 'com.github.ameen.androidkotlintemplate'
+    namespace 'com.gunt.coroutinelabs'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.github.ameen.androidkotlintemplate"
+        applicationId "com.gunt.coroutinelabs"
         minSdk 27
         targetSdk 33
         versionCode 1
