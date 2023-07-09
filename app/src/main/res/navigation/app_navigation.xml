@@ -3,11 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation"
-    app:startDestination="@id/exampleFragment">
+    app:startDestination="@id/mainNavigatorFragment">
 
     <fragment
-        android:id="@+id/exampleFragment"
-        android:name="com.gunt.coroutinelabs.presentation.fragment.ExampleFragment"
-        android:label="ExampleFragment"
-        tools:layout="@layout/fragment_example" />
+        android:id="@+id/mainNavigatorFragment"
+        android:name="com.gunt.coroutinelabs.presentation.fragment.MainNavigatorFragment"
+        android:label="MainNavigatorFragment"
+        tools:layout="@layout/fragment_main_navigator" >
+        <action
+            android:id="@+id/action_mainNavigatorFragment_to_coroutineScopeTest"
+            app:destination="@id/coroutineScopeTest"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/coroutineScopeTest"
+        android:name="com.gunt.coroutinelabs.presentation.fragment.coroutineScopeTest.CoroutineScopeTestFragment"
+        android:label="CoroutineScopeTest"
+        tools:layout="@layout/fragment_coroutine_scope_test" />
 </navigation>

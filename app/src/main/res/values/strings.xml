@@ -1,7 +1,23 @@
 <resources>
-    <string name="app_name" translatable="false">Android Kotlin Template</string>
+    <string name="app_name" translatable="false">CoroutineLab</string>
 
     <string name="error">Some error happened please try again.</string>
     <string name="server_error">Server Error</string>
     <string name="no_internet">No internet connection</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="coroutine_scope_test_desc" translatable="false">val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+            exceptionText.value = "exceptionHandler\n order of priority : $number \n exception occur Time : ${System.currentTimeMillis()} ${throwable.message}\n"
+            number++
+        }
+        val scope = CoroutineScope(Job() + exceptionHandler + Dispatchers.Main)
+        scope.launch {
+            coroutineScope {
+                launch {
+                    nestedLaunchText.value = "nestedLaunch\n order of priority : $number \n nestedLaunch occur Time : ${System.currentTimeMillis()}\n"
+                    number++
+                }
+            }
+            parentLaunchText.value = "parentLaunch\n order of priority : $number \n parentLaunch occur Time : ${System.currentTimeMillis()}\n"
+            number++
+        }</string>
 </resources>

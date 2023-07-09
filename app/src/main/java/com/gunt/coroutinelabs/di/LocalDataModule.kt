@@ -19,6 +19,6 @@ object LocalDataModule {
     fun providesRoomDatabase(application: Application) = Room.databaseBuilder(
         application.applicationContext,
         AppDatabase::class.java,
-        application.getString(R.string.app_name) //Provide your database name.
+        application.getString(R.string.app_name)
     ).fallbackToDestructiveMigration().build()
 }
