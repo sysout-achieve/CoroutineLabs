@@ -1,5 +1,6 @@
 package com.gunt.coroutinelabs
 
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -42,6 +43,102 @@ class CoroutineTest {
             println("2!")
         }
         // 4! 는 runBlocking이 끝나고 나서 출력됨
+        println("4!")
+    }
+
+    @Test
+    fun suspendTest() = runBlocking {
+        doSuspend()
+        println("runBlocking: ${Thread.currentThread().name}")
+        println("5!")
+    }
+
+    private suspend fun doSuspend() = coroutineScope {
+        launch {
+            println("launch1: ${Thread.currentThread().name}")
+            delay(600L)
+            println("3!")
+        }
+        launch {
+            println("launch2: ${Thread.currentThread().name}")
+            println("1!")
+        }
+        launch {
+            println("launch3: ${Thread.currentThread().name}")
+            delay(500L)
+            println("2!")
+        }
+        println("4!")
+    }
+
+
+    @Test
+    fun suspendCancelTest() = runBlocking {
+        cancelJob()
+        println("runBlocking: ${Thread.currentThread().name}")
+        println("5!")
+    }
+
+    private suspend fun cancelJob() = coroutineScope {
+        val job1 = launch {
+            println("launch1: ${Thread.currentThread().name}")
+            delay(1000L)
+            println("3!")
+        }
+
+        val job2 = launch {
+            println("launch2: ${Thread.currentThread().name}")
+            println("1!")
+        }
+
+        val job3 = launch {
+            println("launch3: ${Thread.currentThread().name}")
+            delay(500L)
+            println("2!")
+        }
+
+        delay(100L)
+        job1.cancel()
+        job2.cancel()
+        job3.cancel()
+        println("4!")
+    }
+
+    suspend fun doOneTwoThree() = coroutineScope {
+        val job1 = launch {
+            try {
+                println("launch1: ${Thread.currentThread().name}")
+                delay(1000L)
+                println("3!")
+            } finally {
+                println("job1 is finishing!")
+            }
+        }
+
+        val job2 = launch {
+            try {
+                println("launch2: ${Thread.currentThread().name}")
+                delay(1000L)
+                println("1!")
+            } finally {
+                println("job2 is finishing!")
+            }
+        }
+
+        val job3 = launch {
+            try {
+                println("launch3: ${Thread.currentThread().name}")
+                delay(1000L)
+                println("2!")
+            } finally {
+                println("job3 is finishing!")
+            }
+        }
+
+        delay(800L)
+        job1.cancel()
+        job2.cancel()
+        job3.cancel()
         println("4!")
     }
 }
